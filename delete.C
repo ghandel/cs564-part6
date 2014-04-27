@@ -72,7 +72,7 @@ const Status QU_Delete(const string & relation,
 		return status;
 	}
 
-	stauts = scan.endScan();
+	status = scan.endScan();
 	if (status != OK)
 	{
 		return status;

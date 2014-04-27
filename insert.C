@@ -64,12 +64,12 @@ const Status QU_Insert(const string & relation,
 				type = atInfo[j].attrType;
 				if (type == INTEGER)
 				{
-					int value = atoi(attrList[i].attrValue);
+					int value = atoi((char*)attrList[i].attrValue);
 					memcpy((char*)rec.data + atInfo[j].attrOffset, &value, atInfo[j].attrLen);
 				}
 				else if (type == FLOAT)
 				{
-					float value = atof(attrList[i].attrValue);
+					float value = atof((char*)attrList[i].attrValue);
 					memcpy((char*)rec.data + atInfo[j].attrOffset, &value, atInfo[j].attrLen);
 				}
 				else
