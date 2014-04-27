@@ -107,6 +107,11 @@ const Status ScanSelect(const string & result,
 
     HeapFileScan scan(projNames->relName, status);
 
+    if (status != OK)
+    {
+        return status;
+    }
+
     status = scan.startScan(attrDesc->attrOffset, attrDesc->attrLen, (Datatype)attrDesc->attrType, filter, op);
     if (status != OK)
     {
@@ -131,5 +136,17 @@ const Status ScanSelect(const string & result,
     	RID outRid;
     	status = resultRel.insertRecord(outRec, outRid);
     }
-    return status;
+
+    if (status != FILEEOF)
+    {
+        return status;
+    }
+
+    status = scan.endScan();
+    if (status != OK)
+    {
+        return status;
+    }
+
+    return OK;
 }
